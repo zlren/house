@@ -1,0 +1,33 @@
+server:
+  port: 9000
+
+logging:
+  level: info
+  level.lab.zlren.house.mapper: debug
+
+spring:
+  datasource:
+    url: jdbc:mysql://10.108.114.166:3306/houses?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  freemarker:
+    content-type: text/html;charset=UTF-8
+    expose-request-attributes: true # http参数暴露成变量，无需取出来再使用model添加
+    expose-session-attributes: true # session也暴露出来
+    expose-spring-macro-helpers: true
+    settings:
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      default_encoding: UTF-8
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+  global-config:
+    db-column-underline: true
+    field-strategy: 2
+    id-type: 0
+    refresh-mapper: false
+  typeAliasesPackage: lab.zlren.house.entity
+
