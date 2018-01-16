@@ -31,7 +31,9 @@ mybatis-plus:
     refresh-mapper: false
   typeAliasesPackage: lab.zlren.house.entity
 
-file.path: /Users/zlren/Desktop/house/imgs
+file:
+  path: /Users/zlren/Desktop/house/imgs
+  prefix: http://127.0.0.1:8081/images
 
 spring.mail:
   username:

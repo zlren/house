@@ -25,36 +25,36 @@ public class User implements Serializable {
      * 主键
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id = 0L;
+    private Long id;
     /**
      * 姓名
      */
-    private String name = "";
+    private String name;
     /**
      * 手机号
      */
-    private String phone = "";
+    private String phone;
     /**
      * 电子邮箱
      */
-    private String email = "";
+    private String email;
     /**
      * 自我介绍
      */
     @TableField("about_me")
-    private String aboutMe = "";
+    private String aboutMe;
     /**
      * 密码，md5加密
      */
-    private String passwd = "";
+    private String passwd;
     /**
      * 头像
      */
-    private String avatar = "";
+    private String avatar;
     /**
      * 1普通用户，2经纪人
      */
-    private Integer type = 0;
+    private Integer type;
     /**
      * 创建时间
      */
@@ -63,10 +63,10 @@ public class User implements Serializable {
     /**
      * 1启动，2停用
      */
-    private Integer enable = 2;
+    private Integer enable;
     /**
      * 经纪人所属经纪机构id
      */
     @TableField("agency_id")
-    private Integer agencyId = 0;
+    private Integer agencyId;
 }

@@ -1,5 +1,6 @@
 package lab.zlren.house.biz.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import lab.zlren.house.biz.mapper.UserMapper;
@@ -9,6 +10,7 @@ import lab.zlren.house.common.utils.HashUtil;
 import lab.zlren.house.common.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,9 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     @Autowired
     private MailService mailService;
+
+    @Value("${file.prefix}")
+    private String imgPrefix;
 
     /**
      * 1.插入数据库，非激活;密码加盐md5;保存头像文件到本地
@@ -62,5 +67,28 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     public boolean enable(String key) {
         return mailService.enable(key);
+    }
+
+    /**
+     * 验证用户名密码
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public User auth(String username, String password) {
+
+        User user = selectOne(new EntityWrapper<>(
+                new User()
+                        .setEmail(username)
+                        .setEnable(1)
+        ));
+
+        if (user.getPasswd().equals(HashUtil.encryPassword(password))) {
+            user.setAvatar(imgPrefix + user.getAvatar());
+            return user;
+        }
+
+        return null;
     }
 }
